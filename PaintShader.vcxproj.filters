@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="VertexAttributeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AnalogClock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntaxHighlighter\Highlighter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyGLWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_QtPractice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexAttributeLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboBoxDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformNameLineEditDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformValueLineEditDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AnalogClock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_VertexAttributeLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="AnalogClock.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SyntaxHighlighter\Highlighter.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="MyGLWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="MainWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VertexAttributeManager.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VertexAttributeLayout.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ComboBoxDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UniformNameLineEditDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UniformManager.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UniformValueLineEditDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="QtPractice.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="AnalogClock.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="MainWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="VertexAttributeLayout.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\SimpleVS.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\SimpleFS.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="paintshader_ko.ts">
+      <Filter>Translation Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{3bb1f745-6492-4b17-9a39-38ce77102bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI Files">
+      <UniqueIdentifier>{a5d713e1-2fbc-4eb7-ae3a-4ad86eb6398a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Translation Files">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+  </ItemGroup>
+</Project>

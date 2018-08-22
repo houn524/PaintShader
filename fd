@@ -1,0 +1,35 @@
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{0}: checkout: moving from developing to master
+[33m5690ff9[m[33m ([m[1;32mdeveloping[m[33m)[m HEAD@{1}: commit: gitignore update completely
+[33m5272f00[m HEAD@{2}: checkout: moving from 5272f00cfd15b26be0362fd6c3fdd71fad656d3d to developing
+[33m5272f00[m HEAD@{3}: checkout: moving from f491ec74edb4193025cb8c7aa0c9f752d5b8db01 to HEAD@{28}
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{4}: checkout: moving from eea688446b7194073b57181f9939cf82ced214a7 to HEAD@{28}
+[33meea6884[m HEAD@{5}: checkout: moving from 4d28adfaea8bb057815b48d1e439fc100d90a59d to HEAD@{24}
+[33m4d28adf[m HEAD@{6}: checkout: moving from develop to HEAD@{24}
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{7}: checkout: moving from 4d28adfaea8bb057815b48d1e439fc100d90a59d to develop
+[33m4d28adf[m HEAD@{8}: checkout: moving from f491ec74edb4193025cb8c7aa0c9f752d5b8db01 to HEAD@{22}
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{9}: checkout: moving from 5272f00cfd15b26be0362fd6c3fdd71fad656d3d to HEAD@{16}
+[33m5272f00[m HEAD@{10}: checkout: moving from eea688446b7194073b57181f9939cf82ced214a7 to HEAD@{17}
+[33meea6884[m HEAD@{11}: checkout: moving from 5272f00cfd15b26be0362fd6c3fdd71fad656d3d to HEAD@{18}
+[33m5272f00[m HEAD@{12}: checkout: moving from f491ec74edb4193025cb8c7aa0c9f752d5b8db01 to HEAD@{19}
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{13}: checkout: moving from develop to HEAD@{20}
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{14}: checkout: moving from dcde0340f87a428a98de6255b97cd0af71149f8b to develop
+[33mdcde034[m HEAD@{15}: commit: update gitignore
+[33m5272f00[m HEAD@{16}: checkout: moving from develop to HEAD@{11}
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{17}: checkout: moving from master to develop
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{18}: checkout: moving from develop to master
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{19}: checkout: moving from 5272f00cfd15b26be0362fd6c3fdd71fad656d3d to develop
+[33m5272f00[m HEAD@{20}: checkout: moving from f491ec74edb4193025cb8c7aa0c9f752d5b8db01 to HEAD@{11}
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{21}: checkout: moving from develop to HEAD@{0}
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{22}: checkout: moving from master to develop
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{23}: checkout: moving from develop to master
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{24}: checkout: moving from develop to develop
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{25}: checkout: moving from master to develop
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{26}: checkout: moving from develop to master
+[33mc205afe[m HEAD@{27}: checkout: moving from 5272f00cfd15b26be0362fd6c3fdd71fad656d3d to develop
+[33m5272f00[m HEAD@{28}: checkout: moving from develop to 5272f00cfd15b26be0362fd6c3fdd71fad656d3d
+[33mc205afe[m HEAD@{29}: revert: Revert "developing uniform manager"
+[33meea6884[m HEAD@{30}: commit: update gitignore
+[33m4d28adf[m HEAD@{31}: commit: update gitignore ipch/
+[33m5272f00[m HEAD@{32}: commit: developing uniform manager
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{33}: checkout: moving from master to develop
+[33mf491ec7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{34}: commit (initial): update gitignore
