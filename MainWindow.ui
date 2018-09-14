@@ -368,6 +368,41 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="tab_TextureUnits">
+        <attribute name="title">
+         <string>Texture Units</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="70,30">
+           <item>
+            <widget class="QTableView" name="table_TextureUnits"/>
+           </item>
+           <item>
+            <widget class="QGraphicsView" name="graphics_TextureUnits"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QPushButton" name="btnAddTextureUnit">
+             <property name="text">
+              <string>Add Texture Unit</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnApplyTextureUnits">
+             <property name="text">
+              <string>Apply Texture Units</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
     </item>

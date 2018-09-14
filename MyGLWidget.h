@@ -12,7 +12,8 @@
 #include <QGuiApplication>
 #include <map>
 #include "Camera.h"
-#include "UniformManager.h"
+#include "UniformsModel.h"
+#include <stb_image.h>
 
 class MyGLWidget : public QGLWidget, protected QGLFunctions
 {
@@ -33,9 +34,10 @@ private:
 
 	QString vsCode, fsCode;
 
-	UniformManager *uniformManager;
-
 	unsigned int numberOfVertex = 36;
+
+	QVector<UniformsModel::Uniform>* uniforms;
+	QVector<unsigned int> textureIDs;
 
 signals:
 	void sigLoadedShaders(QString vsCode, QString fsCode);
@@ -43,7 +45,8 @@ signals:
 public slots:
 	void applyShaders(QString vsCode, QString fsCode);
 	void applyVertexBuffer(int, QVector<int>, std::vector<float>);//int count, int* sizes, float* vertices);
-	void applyUniforms(const UniformManager &uniformManager);
+	void applyUniforms(QVector<UniformsModel::Uniform>*);
+	void applyTextures(QVector<QString>* textures);
 
 public:
 	MyGLWidget(QWidget *parent = Q_NULLPTR);
@@ -71,6 +74,7 @@ private:
 	void setupBuffers(int layoutCount, size_t sizesCount, int* sizes, size_t verticesCount, float* vertices);
 	void setupShaders();
 	void setupUniforms();
+	void setupTextures();
 
 	void checkCompileErrors(GLuint shader, QString type);
 };

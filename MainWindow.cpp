@@ -28,7 +28,10 @@ MainWindow::MainWindow(QWidget *parent)
 	connect(ui->layoutsTab, SIGNAL(tabCloseRequested(int)), this, SLOT(clickedCloseLayoutTab(int)));
 	connect(ui->btnAddUniform, SIGNAL(clicked()), this, SLOT(clickedAddUniform()));
 	connect(ui->btnApplyUniforms, SIGNAL(clicked()), this, SLOT(clickedApplyUniforms()));
-	connect(this, SIGNAL(applyUniforms(UniformManager)), ui->myGLWidget, SLOT(applyUniforms(UniformManager)));
+	connect(this, SIGNAL(applyUniforms(QVector<UniformsModel::Uniform>*)), ui->myGLWidget, SLOT(applyUniforms(QVector<UniformsModel::Uniform>*)));
+	connect(ui->btnAddTextureUnit, SIGNAL(clicked()), this, SLOT(clickedAddTexture()));
+	connect(ui->btnApplyTextureUnits, SIGNAL(clicked()), this, SLOT(clickedApplyTexture()));
+	connect(this, SIGNAL(applyTextures(QVector<QString>*)), ui->myGLWidget, SLOT(applyTextures(QVector<QString>*)));
 
 	ui->layoutsTab->removeTab(0);
 	ui->layoutsTab->removeTab(0);
@@ -51,19 +54,52 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->layoutsTab->tabBar()->setTabButton(1, QTabBar::RightSide, tb);
 	connect(tb, SIGNAL(clicked()), this, SLOT(clickedAddLayout()));
 	
-	uniformModel = new QStandardItemModel();
-	uniformModel->setHorizontalHeaderItem(0, new QStandardItem(tr("Type")));
-	uniformModel->setHorizontalHeaderItem(1, new QStandardItem(tr("Name")));
-	uniformModel->setHorizontalHeaderItem(2, new QStandardItem(tr("Value")));
+	uniformModel = new UniformsModel();
+	uniforms = new QVector<UniformsModel::Uniform>();
+	QVector<float> vec = { -0.7f, -0.8f, -1.0f };
+	UniformsModel::Uniform uniform = { UniformsModel::UniformTypes::Vec3, "dirLight.direction", vec };
+	uniforms->push_back(uniform);
+	vec = { 0.3f, 0.3f, 0.3f };
+	uniform = { UniformsModel::UniformTypes::Vec3, "dirLight.ambient", vec };
+	uniforms->push_back(uniform);
+	vec = { 0.8f, 0.8f, 0.8f };
+	uniform = { UniformsModel::UniformTypes::Vec3, "dirLight.diffuse", vec };
+	uniforms->push_back(uniform);
+	vec = { 0.9f, 0.9f, 0.9f };
+	uniform = { UniformsModel::UniformTypes::Vec3, "dirLight.specular", vec };
+	uniforms->push_back(uniform);
+	vec = { 0 };
+	uniform = { UniformsModel::UniformTypes::Int, "material.texture_diffuse", vec };
+	uniforms->push_back(uniform);
+	vec = { 1 };
+	uniform = { UniformsModel::UniformTypes::Int, "material.texture_specular", vec };
+	uniforms->push_back(uniform);
+	uniformModel->setUniformVector(uniforms);
+	ui->myGLWidget->applyUniforms(uniforms);
 
 	ui->table_Uniforms->setModel(uniformModel);
+	ui->table_Uniforms->setItemDelegateForColumn(0, new ComboBoxDelegate());
+	ui->table_Uniforms->setItemDelegateForColumn(1, new UniformNameLineEditDelegate());
+	ui->table_Uniforms->setItemDelegateForColumn(2, new UniformValueLineEditDelegate());
 	ui->table_Uniforms->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->table_Uniforms->horizontalHeader()->setStretchLastSection(true);
-	
 	ui->table_Uniforms->resizeColumnsToContents();
-	addUniform(0);
+	ui->table_Uniforms->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(ui->table_Uniforms, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(uniformTableCustomMenuRequested(QPoint)));
+	//addUniform(0);
 
-	uniformManager = new UniformManager();
+	textureModel = new TextureUnitsModel();
+	textures = new QVector<QString>();
+	textures->push_back("a");
+	textures->push_back("");
+	textureModel->setTextureVector(textures);
+
+	ui->table_TextureUnits->setModel(textureModel);
+	ui->table_TextureUnits->setItemDelegateForColumn(0, new TextureFileNameDelegate(0));
+	ui->table_TextureUnits->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui->table_TextureUnits->resizeColumnsToContents();
+	ui->table_TextureUnits->setContextMenuPolicy(Qt::CustomContextMenu);
+	connect(ui->table_TextureUnits, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(textureTableCustomMenuRequested(QPoint)));
 
 	vsHighlighter = new Highlighter(ui->txtEdit_VertexShader->document());
 	fsHighlighter = new Highlighter(ui->txtEdit_FragmentShader->document());
@@ -74,7 +110,10 @@ MainWindow::~MainWindow()
 	delete ui;
 	delete VAManager;
 	delete uniformModel;
-	delete uniformManager;
+	delete uniforms;
+	//delete uniformManager;
+	delete textureModel;
+	delete textures;
 }
 
 void MainWindow::setShaderCode(QString vsCode, QString fsCode)
@@ -122,10 +161,8 @@ void MainWindow::clickedApplyVertexAttribute()
 
 		std::vector<float> vertices;
 		foreach(const QString &data, dataList)
-		{
-			qDebug() << data.toFloat();
 			vertices.push_back(data.toFloat());
-		}
+
 		vertexSet.push_back(vertices);
 	}
 
@@ -178,13 +215,6 @@ void MainWindow::clickedCloseLayoutTab(int index)
 void MainWindow::addUniform(int row)
 {
 	uniformModel->insertRow(row);
-	ui->table_Uniforms->setItemDelegateForColumn(0, new ComboBoxDelegate());
-	ui->table_Uniforms->setItemDelegateForColumn(1, new UniformNameLineEditDelegate());
-	ui->table_Uniforms->setItemDelegateForColumn(2, new UniformValueLineEditDelegate());
-	uniformModel->setData(uniformModel->index(uniformModel->rowCount() - 1, 0, QModelIndex()), "float");
-	uniformModel->setData(uniformModel->index(uniformModel->rowCount() - 1, 0), Qt::AlignCenter, Qt::TextAlignmentRole);
-	uniformModel->setData(uniformModel->index(uniformModel->rowCount() - 1, 1), Qt::AlignCenter, Qt::TextAlignmentRole);
-	uniformModel->setData(uniformModel->index(uniformModel->rowCount() - 1, 2), Qt::AlignCenter, Qt::TextAlignmentRole);
 }
 
 void MainWindow::clickedAddUniform()
@@ -194,56 +224,60 @@ void MainWindow::clickedAddUniform()
 
 void MainWindow::clickedApplyUniforms()
 {
+	emit applyUniforms(uniforms);
+}
 
-	int rowCount = uniformModel->rowCount();
-	UniformTypes type;
-	QVector<Uniform> uniformVector;
-	UniformManager uniformManager;
-	for (int i = 0; i < rowCount; i++)
-	{
-		QString strType = uniformModel->data(uniformModel->index(i, 0)).toString();
-		if (strType == "float") type = UniformTypes::_FLOAT;
-		else if (strType == "int") type = UniformTypes::_INT;
-		else if (strType == "vec2") type = UniformTypes::VEC2;
-		else if (strType == "vec3") type = UniformTypes::VEC3;
-		else if (strType == "vec4") type = UniformTypes::VEC4;
-		else if (strType == "mat3") type = UniformTypes::MAT3;
-		else if (strType == "mat4") type = UniformTypes::MAT4;
+void MainWindow::clickedAddTexture()
+{
+	addTextureUnit();
+}
 
-		QString strName = uniformModel->data(uniformModel->index(i, 1)).toString();
-		if (strName.isEmpty())
-		{
-			QMessageBox::warning(this, tr("warnning"), tr("Uniform Name Empty"));
-			return;
-		}
-		
-		QString strValue = uniformModel->data(uniformModel->index(i, 2)).toString();
-		if (strValue.isEmpty())
-		{
-			QMessageBox::warning(this, tr("warnning"), tr("Uniform Value Empty"));
-			return;
-		}
-		QStringList strValueList;
+void MainWindow::addTextureUnit()
+{
+	textureModel->insertRow(textureModel->rowCount());
+}
 
-		strValue.simplified();
-		strValue.trimmed();
-		strValue.replace(" ", "");
-		strValue.replace("f", "");
-		strValue.replace("\t", "");
-		strValue.replace("\n", "");
-		strValueList = strValue.split(",");
-		QVector<float> values;
-		foreach(const QString &strValue, strValueList)
-		{
-			values.push_back(strValue.toFloat());
-		}
+void MainWindow::clickedApplyTexture()
+{
+	emit applyTextures(textures);
+}
 
-		Uniform uniform = { type, strName, values };
-		qDebug() << type << ", " << values[1] << ", " << strName;
-		uniformVector.push_back(uniform);
-	}
-	//uniformManager->clear();
-	uniformManager.insert(uniformVector);
+void MainWindow::textureTableCustomMenuRequested(QPoint pos)
+{
+	QModelIndex index = ui->table_TextureUnits->indexAt(pos);
 
-	emit applyUniforms(uniformManager);
+	QMenu* menu = new QMenu(this);
+	QAction* actRemove = new QAction(tr("remove"));
+	menu->addAction(actRemove);
+	menu->popup(ui->table_TextureUnits->viewport()->mapToGlobal(pos));
+	connect(actRemove, &QAction::triggered, this, &MainWindow::removeTexture);
+}
+
+void MainWindow::uniformTableCustomMenuRequested(QPoint pos)
+{
+	QModelIndex index = ui->table_Uniforms->indexAt(pos);
+
+	QMenu* menu = new QMenu(this);
+	QAction* actRemove = new QAction(tr("remove"));
+	menu->addAction(actRemove);
+	menu->popup(ui->table_Uniforms->viewport()->mapToGlobal(pos));
+	connect(actRemove, &QAction::triggered, this, &MainWindow::removeUniform);
+}
+
+void MainWindow::removeTexture()
+{
+	QModelIndexList indexes = ui->table_TextureUnits->selectionModel()->selectedRows();
+	int countRow = indexes.count();
+
+	for (int i = countRow; i > 0; i--)
+		textureModel->removeRow(indexes.at(i - 1).row(), QModelIndex());
+}
+
+void MainWindow::removeUniform()
+{
+	QModelIndexList indexes = ui->table_Uniforms->selectionModel()->selectedIndexes();
+	int countRow = indexes.count();
+
+	for (int i = countRow; i > 0; i--)
+		uniformModel->removeRow(indexes.at(i - 1).row(), QModelIndex());
 }

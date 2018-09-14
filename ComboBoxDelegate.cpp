@@ -13,20 +13,17 @@ QWidget* ComboBoxDelegate::createEditor(QWidget* parent, const QStyleOptionViewI
 {
 	QComboBox* editor = new QComboBox(parent);
 	QStringList itemList;
-	itemList << "float" << "int" << "vec2" << "vec3" << "vec4" << "mat3" << "mat4";
+	itemList << "Float" << "Int" << "Vec2" << "Vec3" << "Vec4" << "Mat3" << "Mat4";
 	editor->setEditable(true);
 	editor->lineEdit()->setReadOnly(true);
 	editor->lineEdit()->setAlignment(Qt::AlignCenter);
 	editor->insertItems(0, itemList);
-	editor->setCurrentText("float");
-	for (int i = 0; i < editor->count(); i++)
-		editor->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
 	return editor;
 }
 
 void ComboBoxDelegate::setEditorData(QWidget* editor, const QModelIndex &index) const
 {
-	//QComboBox* comboBox = static_cast<QComboBox*>(editor);
+	QAbstractItemDelegate::setEditorData(editor, index);
 }
 
 void ComboBoxDelegate::setModelData(QWidget* editor, QAbstractItemModel *model, const QModelIndex &index) const

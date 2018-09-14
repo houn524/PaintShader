@@ -1,50 +1,52 @@
+#define STB_IMAGE_IMPLEMENTATION
 #include "MyGLWidget.h"
 #include <QtDebug>
 
 bool firstMousePress = true;
 bool rightButton = false;
 float init_vertices[] = {
-	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-	0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-	0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-	0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-
-	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-	0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-	0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-	0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-
-	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-	0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-	0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-	0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-	0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-	0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-	0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-	0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-	0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-	0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-
-	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-	0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-	0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-	0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-	-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+	// Back face
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f, // Bottom-left
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f, // top-right
+     0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f, // bottom-right         
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f, // top-right
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f, // bottom-left
+    -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f, // top-left
+    // Front face
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f, // bottom-left
+     0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f, // bottom-right
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f, // top-right
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f, // top-right
+    -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f, // top-left
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f, // bottom-left
+    // Left face
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f, // top-right
+    -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f, // top-left
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f, // bottom-left
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f, // bottom-left
+    -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f, // bottom-right
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f, // top-right
+    // Right face
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f, // top-left
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f, // bottom-right
+     0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f, // top-right         
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f, // bottom-right
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f, // top-left
+     0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  0.0f, // bottom-left     
+    // Bottom face
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f, // top-right
+     0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f, // top-left
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f, // bottom-left
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f, // bottom-left
+    -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f, // bottom-right
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f, // top-right
+    // Top face
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f, // top-left
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f, // bottom-right
+     0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f, // top-right     
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f, // bottom-right
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f, // top-left
+    -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f  // bottom-left 
 };
 MyGLWidget::MyGLWidget(QWidget *parent)
 	: QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
@@ -54,7 +56,8 @@ MyGLWidget::MyGLWidget(QWidget *parent)
 	startTimer(1000 / 60);
 
 	camera = new Camera(glm::vec3(0.0f, 0.0f, 10.0f));
-	uniformManager = new UniformManager();
+	uniforms = new QVector<UniformsModel::Uniform>();
+	//uniformManager = new UniformManager();
 	/*QGLFormat format;
 	format.setDepthBufferSize(24);
 	format.setVersion(4, 5);
@@ -72,6 +75,7 @@ MyGLWidget::~MyGLWidget()
 	VAO->deleteLater();
 	glDeleteBuffers(1, &VBO);
 	delete camera;
+	delete uniforms;
 }
 
 QSize MyGLWidget::minimumSizeHint() const
@@ -100,8 +104,8 @@ void MyGLWidget::initializeGL()
 	VAO->create();
 	glGenBuffers(1, &VBO);
 
-	int sizes[2] = { 3, 2 };
-	setupBuffers(1, sizeof(sizes) / sizeof(int), sizes, sizeof(init_vertices) / sizeof(float), init_vertices);
+	int sizes[3] = { 3, 3, 2 };
+	setupBuffers(3, sizeof(sizes) / sizeof(int), sizes, sizeof(init_vertices) / sizeof(float), init_vertices);
 	setupShaders();
 
 	glEnable(GL_DEPTH_TEST);
@@ -175,7 +179,6 @@ void MyGLWidget::setupShaders()
 	QTextStream vsIn(&vsFile);
 	QTextStream fsIn(&fsFile);
 	vsCode = vsIn.readAll();
-	qDebug() << "vs;; :" << vsCode;
 	fsCode = fsIn.readAll();
 
 	QByteArray ba = vsCode.toLatin1();
@@ -274,8 +277,6 @@ void MyGLWidget::timerEvent(QTimerEvent *event)
 			camera->processKeyboard(CameraMovement::BACKWARD);
 		if (keys[Qt::Key_D])
 			camera->processKeyboard(CameraMovement::RIGHT);
-
-		
 	}
 	updateGL();
 	lastPos = pos;
@@ -284,6 +285,7 @@ void MyGLWidget::timerEvent(QTimerEvent *event)
 void MyGLWidget::draw()
 {
 	setupUniforms();
+	setupTextures();
 	glUseProgram(programID);
 
 	glm::mat4 model = glm::mat4(1.0f);
@@ -299,6 +301,7 @@ void MyGLWidget::draw()
 	glUniformMatrix4fv(glGetUniformLocation(programID, "model"), 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(glGetUniformLocation(programID, "view"), 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(glGetUniformLocation(programID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+	glUniform3fv(glGetUniformLocation(programID, "viewPos"), 1, &(camera->position.x));
 
 	VAO->bind();
 	glDrawArrays(GL_TRIANGLES, 0, numberOfVertex);
@@ -363,35 +366,90 @@ void MyGLWidget::setupUniforms()
 {
 	glUseProgram(programID);
 
-	int count = uniformManager->count();
-	qDebug() << count;
+	int count = uniforms->count();
 	for (int i = 0; i < count; i++)
 	{
-		Uniform uniform = uniformManager->get(i);
+		UniformsModel::Uniform uniform = (*uniforms)[i];
 
-		if (uniform.type == UniformTypes::_FLOAT)
+		if (uniform.type == UniformsModel::UniformTypes::Float)
 			glUniform1f(glGetUniformLocation(programID, uniform.name.toStdString().c_str()), uniform.value[0]);
-		else if (uniform.type == UniformTypes::_INT)
+		else if (uniform.type == UniformsModel::UniformTypes::Int)
 			glUniform1i(glGetUniformLocation(programID, uniform.name.toStdString().c_str()), int(uniform.value[0]));
-		else if (uniform.type == UniformTypes::VEC3)
+		else if (uniform.type == UniformsModel::UniformTypes::Vec3)
 			glUniform3fv(glGetUniformLocation(programID, uniform.name.toStdString().c_str()), 1, uniform.value.begin());
-		else if (uniform.type == UniformTypes::VEC2)
+		else if (uniform.type == UniformsModel::UniformTypes::Vec2)
 			glUniform2fv(glGetUniformLocation(programID, uniform.name.toStdString().c_str()), 1, uniform.value.begin());
-		else if (uniform.type == UniformTypes::VEC4)
-		{
+		else if (uniform.type == UniformsModel::UniformTypes::Vec4)
 			glUniform4fv(glGetUniformLocation(programID, uniform.name.toStdString().c_str()), 1, uniform.value.begin());
-			qDebug() << uniform.value[1];
-		}
-
-		else if (uniform.type == UniformTypes::MAT4)
+		else if (uniform.type == UniformsModel::UniformTypes::Mat4)
 			glUniformMatrix4fv(glGetUniformLocation(programID, uniform.name.toStdString().c_str()), 1, GL_FALSE, uniform.value.begin());
-		else if (uniform.type == UniformTypes::MAT3)
+		else if (uniform.type == UniformsModel::UniformTypes::Mat3)
 			glUniformMatrix3fv(glGetUniformLocation(programID, uniform.name.toStdString().c_str()), 1, GL_FALSE, uniform.value.begin());
 	}
 }
 
-void MyGLWidget::applyUniforms(const UniformManager &uniformManager)
+void MyGLWidget::applyUniforms(QVector<UniformsModel::Uniform>* _uniforms)
 {
-	this->uniformManager = new UniformManager(uniformManager);
+	foreach(UniformsModel::Uniform uniform, *_uniforms)
+	{
+		this->uniforms->push_back(uniform);
+	}
+	//qDebug() << "applyUniforms : " << (*uniforms)[1].name << (*uniforms)[1].value.at(1);
 	updateGL();
+}
+
+void MyGLWidget::applyTextures(QVector<QString>* textures)
+{
+	qDebug() << "applyTextures(QVector) called!";
+	textureIDs.clear();
+	for(int i = 0; i < textures->count(); i++)
+	{
+		QString filename = (*textures)[i];
+		qDebug() << filename;
+
+		unsigned int textureID;
+		glGenTextures(1, &textureID);
+
+		int width, height, nrComponents;
+		unsigned char *data = stbi_load(filename.toStdString().c_str(), &width, &height, &nrComponents, 0);
+		if (data)
+		{
+			GLenum format;
+			if (nrComponents == 1)
+				format = GL_RED;
+			else if (nrComponents == 3)
+				format = GL_RGB;
+			else if (nrComponents == 4)
+				format = GL_RGBA;
+
+			glBindTexture(GL_TEXTURE_2D, textureID);
+			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+			stbi_image_free(data);
+		}
+		else
+		{
+			QMessageBox::warning(this, tr("warnning"), QStringLiteral("Texture failed to load at path: %1").arg(filename));
+			stbi_image_free(data);
+		}
+
+		textureIDs.push_back(textureID);
+	}
+
+	updateGL();
+}
+
+void MyGLWidget::setupTextures()
+{
+	for (int i = 0; i < textureIDs.count(); i++)
+	{
+		glActiveTexture(GL_TEXTURE0 + i);
+		glBindTexture(GL_TEXTURE_2D, textureIDs[i]);
+	}
 }

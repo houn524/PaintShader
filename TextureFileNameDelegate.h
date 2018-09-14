@@ -1,19 +1,19 @@
 #pragma once
-#ifndef __COMBOBOXDELEGATE_H__
-#define __COMBOBOXDELEGATE_H__
+#ifndef __TEXTUREFILENAMEDELEGATE_H__
+#define __TEXTUREFILENAMEDELEGATE_H__
 
 #include <QItemDelegate>
-#include <QComboBox>
 #include <QLineEdit>
+#include <QFileDialog>
 #include <QDebug>
 
-class ComboBoxDelegate : public QItemDelegate
+class TextureFileNameDelegate : public QItemDelegate
 {
 	Q_OBJECT
 
 public:
-	ComboBoxDelegate(QObject *parent = 0);
-	~ComboBoxDelegate();
+	TextureFileNameDelegate(QObject *parent);
+	~TextureFileNameDelegate();
 
 	QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 	void setEditorData(QWidget* editor, const QModelIndex &index) const;

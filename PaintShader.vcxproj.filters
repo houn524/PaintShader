@@ -34,10 +34,19 @@
     <ClCompile Include="UniformNameLineEditDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UniformManager.cpp">
+    <ClCompile Include="UniformValueLineEditDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UniformValueLineEditDelegate.cpp">
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureUnitsModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureFileNameDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UniformsModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,10 +89,19 @@
     <QtMoc Include="UniformNameLineEditDelegate.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UniformManager.h">
+    <QtMoc Include="UniformValueLineEditDelegate.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="UniformValueLineEditDelegate.h">
+    <QtMoc Include="ImageLoader.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="TextureUnitsModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="TextureFileNameDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UniformsModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

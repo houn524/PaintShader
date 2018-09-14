@@ -11,9 +11,6 @@ class UniformNameLineEditDelegate : public QItemDelegate
 {
 	Q_OBJECT
 
-private:
-	QString lastString;
-
 public:
 	UniformNameLineEditDelegate(QObject *parent = 0);
 	~UniformNameLineEditDelegate();

@@ -4,13 +4,17 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets>
+#include <QMenu>
 #include "ui_MainWindow.h"
 #include "SyntaxHighlighter/Highlighter.h"
 #include "VertexAttributeManager.h"
 #include "ComboBoxDelegate.h"
 #include "UniformNameLineEditDelegate.h"
 #include "UniformValueLineEditDelegate.h"
-#include "UniformManager.h"
+//#include "UniformManager.h"
+#include "UniformsModel.h"
+#include "TextureUnitsModel.h"
+#include "TextureFileNameDelegate.h"
 
 
 class MainWindow : public QMainWindow
@@ -24,7 +28,8 @@ public:
 signals:
 	void clickedApplyShaders(QString, QString);
 	void clickedApplyVertexAttribute(int, QVector<int>, std::vector<float>);// int count, int sizes[], float* vertices);
-	void applyUniforms(const UniformManager &uniformManager);
+	void applyUniforms(QVector<UniformsModel::Uniform>*);
+	void applyTextures(QVector<QString>*);
 
 public slots:
 	void setShaderCode(QString vsCode, QString fsCode);
@@ -34,6 +39,14 @@ public slots:
 	void clickedCloseLayoutTab(int);
 	void clickedAddUniform();
 	void clickedApplyUniforms();
+	void clickedAddTexture();
+	void clickedApplyTexture();
+
+	void removeTexture();
+	void removeUniform();
+
+	void textureTableCustomMenuRequested(QPoint pos);
+	void uniformTableCustomMenuRequested(QPoint pos);
 	/*void on_actionNew_triggered();
 	void on_actionOpen_triggered();
 	void on_actionSave_triggered();
@@ -56,14 +69,18 @@ protected:
 
 private:
 	void addUniform(int row);
+	void addTextureUnit();
 
 private:
 	Ui::MainWindow *ui;
 	Highlighter *vsHighlighter;
 	Highlighter *fsHighlighter;
 	VertexAttributeManager *VAManager;
-	QStandardItemModel *uniformModel;
-	UniformManager *uniformManager;
+	UniformsModel *uniformModel;
+	QVector<UniformsModel::Uniform> *uniforms;
+	TextureUnitsModel *textureModel;
+	QVector<QString> *textures;
+	//UniformManager *uniformManager;
 	//QString currentFile;
 };
 
